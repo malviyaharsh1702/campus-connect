@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard | CampusConnect</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* ==========================================
+           DASHBOARD NAVBAR
+        ========================================== */
+
+        .dashboard-navbar {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 18px 7%;
+
+            background: #101827;
+
+            border-bottom:
+                1px solid rgba(96, 165, 250, 0.13);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+        }
+
+
+        .dashboard-logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #f8fafc;
+
+            font-size: 22px;
+
+            font-weight: 700;
+        }
+
+
+        .dashboard-logo .logo-icon {
+
+            width: 38px;
+
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 25px rgba(37, 99, 235, 0.20);
+        }
+
+
+        .dashboard-logo span span {
+
+            color: #60a5fa;
+        }
+
+
+        .dashboard-nav {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+        }
+
+
+        .dashboard-nav a {
+
+            color: #cbd5e1;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.3s ease;
+        }
+
+
+        .dashboard-nav a:hover {
+
+            color: #60a5fa;
+        }
+
+
+        /* ==========================================
+           LOGOUT
+        ========================================== */
+
+        .logout-btn {
+
+            border:
+                1px solid rgba(96, 165, 250, 0.25);
+
+            background: transparent;
+
+            color: #cbd5e1;
+
+            padding: 9px 17px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: 0.3s ease;
+        }
+
+
+        .logout-btn:hover {
+
+            background: #2563eb;
+
+            color: white;
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 8px 22px rgba(37, 99, 235, 0.20);
+        }
+
+
+        /* ==========================================
+           DASHBOARD BACKGROUND
+        ========================================== */
+
+        .dashboard-page {
+
+            min-height:
+                calc(100vh - 75px);
+
+            padding: 50px 7%;
+
+            color: #f8fafc;
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(37, 99, 235, 0.10),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(16, 185, 129, 0.06),
+                    transparent 30%
+                ),
+
+                #070d1a;
+        }
+
+
+        /* ==========================================
+           WELCOME
+        ========================================== */
+
+        .welcome-section {
+
+            margin-bottom: 35px;
+        }
+
+
+        .welcome-section small {
+
+            color: #60a5fa;
+
+            letter-spacing: 1.2px;
+
+            font-size: 11px;
+        }
+
+
+        .welcome-section h1 {
+
+            margin: 8px 0;
+
+            font-size: 34px;
+
+            color: #f8fafc;
+        }
+
+
+        .welcome-section h1 span {
+
+            color: #60a5fa;
+        }
+
+
+        .welcome-section p {
+
+            color: #718096;
+
+            margin: 0;
+        }
+
+
+        /* ==========================================
+           USER CARD
+        ========================================== */
+
+        .user-card {
+
+            background: #101827;
+
+            border:
+                1px solid rgba(96, 165, 250, 0.13);
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 15px 45px rgba(0, 0, 0, 0.20);
+        }
+
+
+        .user-card h3 {
+
+            margin-top: 0;
+
+            margin-bottom: 18px;
+
+            color: #f8fafc;
+        }
+
+
+        .user-info {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .info-box {
+
+            background: #0b1422;
+
+            padding: 15px;
+
+            border-radius: 9px;
+
+            border:
+                1px solid rgba(148, 163, 184, 0.14);
+
+            transition: 0.3s ease;
+        }
+
+
+        .info-box:hover {
+
+            border-color:
+                rgba(59, 130, 246, 0.35);
+        }
+
+
+        .info-box small {
+
+            display: block;
+
+            color: #64748b;
+
+            margin-bottom: 6px;
+
+            font-size: 12px;
+        }
+
+
+        .info-box strong {
+
+            color: #f8fafc;
+
+            font-size: 14px;
+        }
+
+
+        /* ==========================================
+           STATISTICS
+        ========================================== */
+
+        .stats-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .stat-card {
+
+            background: #101827;
+
+            border:
+                1px solid rgba(96, 165, 250, 0.13);
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            transition: 0.3s ease;
+        }
+
+
+        .stat-card:hover {
+
+            transform: translateY(-3px);
+
+            border-color:
+                rgba(59, 130, 246, 0.35);
+
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.20);
+        }
+
+
+        .stat-card h2 {
+
+            font-size: 32px;
+
+            margin: 0 0 5px;
+
+            color: #60a5fa;
+        }
+
+
+        .stat-card p {
+
+            color: #718096;
+
+            margin: 0;
+        }
+
+
+        .stat-icon {
+
+            font-size: 25px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* ==========================================
+           SECTION TITLE
+        ========================================== */
+
+        .section-title {
+
+            margin-bottom: 20px;
+        }
+
+
+        .section-title h2 {
+
+            margin: 0 0 5px;
+
+            color: #f8fafc;
+        }
+
+
+        .section-title p {
+
+            color: #718096;
+
+            margin: 0;
+        }
+
+
+        /* ==========================================
+           QUICK ACTIONS
+        ========================================== */
+
+        .actions-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 40px;
+        }
+
+
+        .action-card {
+
+            background: #101827;
+
+            border:
+                1px solid rgba(96, 165, 250, 0.13);
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            text-decoration: none;
+
+            color: #fff;
+
+            transition: 0.3s ease;
+        }
+
+
+        .action-card:hover {
+
+            transform: translateY(-4px);
+
+            border-color:
+                rgba(59, 130, 246, 0.40);
+
+            background: #111c2e;
+
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.20);
+        }
+
+
+        .action-card .icon {
+
+            font-size: 28px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .action-card h3 {
+
+            margin: 0 0 8px;
+
+            color: #f8fafc;
+        }
+
+
+        .action-card p {
+
+            color: #718096;
+
+            margin: 0;
+
+            line-height: 1.5;
+        }
+
+
+        /* ==========================================
+           RECENT ACTIVITY
+        ========================================== */
+
+        .activity-section {
+
+            background: #101827;
+
+            border:
+                1px solid rgba(96, 165, 250, 0.13);
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 15px 45px rgba(0, 0, 0, 0.20);
+        }
+
+
+        .activity-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 16px 0;
+
+            border-bottom:
+                1px solid rgba(148, 163, 184, 0.10);
+        }
+
+
+        .activity-item:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .activity-dot {
+
+            width: 10px;
+
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: #34d399;
+
+            box-shadow:
+                0 0 10px rgba(52, 211, 153, 0.25);
+
+            flex-shrink: 0;
+        }
+
+
+        .activity-content {
+
+            flex: 1;
+        }
+
+
+        .activity-content strong {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: #f8fafc;
+        }
+
+
+        .activity-content small {
+
+            color: #64748b;
+        }
+
+
+        .activity-status {
+
+            color: #60a5fa;
+
+            font-size: 13px;
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 900px) {
+
+            .dashboard-nav {
+
+                gap: 12px;
+            }
+
+
+            .user-info,
+            .stats-grid,
+            .actions-grid {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .dashboard-navbar {
+
+                padding: 15px 5%;
+            }
+
+
+            .dashboard-nav a {
+
+                display: none;
+            }
+
+
+            .dashboard-page {
+
+                padding: 35px 5%;
+            }
+
+
+            .welcome-section h1 {
+
+                font-size: 28px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         NAVBAR
+    ========================================== -->
+
+    <header class="dashboard-navbar">
+
+        <div class="dashboard-logo">
+
+            <span class="logo-icon">
+                C
+            </span>
+
+            <span>
+                Campus<span>Connect</span>
+            </span>
+
+        </div>
+
+
+        <nav class="dashboard-nav">
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="campus-problems.html">
+                Problems
+            </a>
+
+            <a href="lost-found.html">
+                Lost & Found
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==========================================
+         MAIN DASHBOARD
+    ========================================== -->
+
+    <main class="dashboard-page">
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome-section">
+
+            <small>
+                STUDENT DASHBOARD
+            </small>
+
+            <h1>
+                Welcome back,
+                <span id="studentName">
+                    Student
+                </span>
+                👋
+            </h1>
+
+            <p>
+                Manage your campus activities from one place.
+            </p>
+
+        </section>
+
+
+        <!-- USER INFORMATION -->
+
+        <section class="user-card">
+
+            <h3>
+                Student Information
+            </h3>
+
+
+            <div class="user-info">
+
+
+                <div class="info-box">
+
+                    <small>
+                        Name
+                    </small>
+
+                    <strong id="userName">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <small>
+                        Email
+                    </small>
+
+                    <strong id="userEmail">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <small>
+                        Role
+                    </small>
+
+                    <strong id="userRole">
+                        Student
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📋
+                </div>
+
+                <h2 id="problemCount">
+                    0
+                </h2>
+
+                <p>
+                    My Complaints
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🔎
+                </div>
+
+                <h2 id="lostFoundCount">
+                    0
+                </h2>
+
+                <p>
+                    Lost & Found Reports
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+                <h2 id="resolvedCount">
+                    0
+                </h2>
+
+                <p>
+                    Resolved Complaints
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <section>
+
+
+            <div class="section-title">
+
+                <h2>
+                    Quick Actions
+                </h2>
+
+                <p>
+                    Access your most-used CampusConnect features.
+                </p>
+
+            </div>
+
+
+            <div class="actions-grid">
+
+
+                <a
+                    href="campus-problems.html"
+                    class="action-card"
+                >
+
+                    <div class="icon">
+                        📋
+                    </div>
+
+                    <h3>
+                        Report a Problem
+                    </h3>
+
+                    <p>
+                        Submit a new campus complaint
+                        and track its progress.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="lost-found.html"
+                    class="action-card"
+                >
+
+                    <div class="icon">
+                        🔎
+                    </div>
+
+                    <h3>
+                        Lost & Found
+                    </h3>
+
+                    <p>
+                        Report a lost item or check
+                        campus-wide reports.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="profile.html"
+                    class="action-card"
+                >
+
+                    <div class="icon">
+                        👤
+                    </div>
+
+                    <h3>
+                        My Profile
+                    </h3>
+
+                    <p>
+                        View and manage your
+                        student account information.
+                    </p>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT ACTIVITY -->
+
+        <section class="activity-section">
+
+
+            <div class="section-title">
+
+                <h2>
+                    Recent Activity
+                </h2>
+
+                <p>
+                    Your latest CampusConnect activities.
+                </p>
+
+            </div>
+
+
+            <div id="recentActivity">
+
+
+                <div class="activity-item">
+
+                    <div class="activity-dot"></div>
+
+                    <div class="activity-content">
+
+                        <strong>
+                            Loading activity...
+                        </strong>
+
+                        <small>
+                            Please wait
+                        </small>
+
+                    </div>
+
+                    <span class="activity-status">
+                        —
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+
+        const API_URL =
+            "http://127.0.0.1:5000";
+
+
+        /* ==========================================
+           CHECK LOGIN
+        ========================================== */
+
+        const token =
+            localStorage.getItem(
+                "campusconnectToken"
+            );
+
+
+        const storedUser =
+            localStorage.getItem(
+                "campusconnectUser"
+            );
+
+
+        if (!token || !storedUser) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        /* ==========================================
+           LOAD USER
+        ========================================== */
+
+        let user = null;
+
+
+        try {
+
+            user =
+                JSON.parse(
+                    storedUser
+                );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "User data error:",
+                error
+            );
+
+        }
+
+
+        if (user) {
+
+
+            const name =
+                user.name ||
+                user.fullName ||
+                user.username ||
+                "Student";
+
+
+            document
+                .getElementById(
+                    "studentName"
+                )
+                .textContent = name;
+
+
+            document
+                .getElementById(
+                    "userName"
+                )
+                .textContent = name;
+
+
+            document
+                .getElementById(
+                    "userEmail"
+                )
+                .textContent =
+                    user.email ||
+                    "Not available";
+
+
+            document
+                .getElementById(
+                    "userRole"
+                )
+                .textContent =
+                    user.role ||
+                    "Student";
+
+        }
+
+
+        /* ==========================================
+           LOAD DASHBOARD DATA
+        ========================================== */
+
+        async function loadDashboardData() {
+
+            try {
+
+
+                const headers = {
+
+                    "Authorization":
+                        `Bearer ${token}`
+
+                };
+
+
+                /* ==========================================
+                   MY PROBLEMS
+                ========================================== */
+
+                const problemsResponse =
+                    await fetch(
+                        `${API_URL}/api/problems/my`,
+                        {
+                            headers
+                        }
+                    );
+
+
+                if (problemsResponse.ok) {
+
+
+                    const problems =
+                        await problemsResponse.json();
+
+
+                    const problemList =
+                        Array.isArray(problems)
+                            ? problems
+                            : problems.problems || [];
+
+
+                    document
+                        .getElementById(
+                            "problemCount"
+                        )
+                        .textContent =
+                            problemList.length;
+
+
+                    const resolved =
+                        problemList.filter(
+                            problem =>
+
+                                problem.status &&
+
+                                problem.status
+                                    .toLowerCase() ===
+                                    "resolved"
+
+                        ).length;
+
+
+                    document
+                        .getElementById(
+                            "resolvedCount"
+                        )
+                        .textContent =
+                            resolved;
+
+
+                    updateActivity(
+                        problemList
+                    );
+
+                }
+
+
+                /* ==========================================
+                   LOST & FOUND
+                ========================================== */
+
+                const lostResponse =
+                    await fetch(
+                        `${API_URL}/api/lost-found/my`,
+                        {
+                            headers
+                        }
+                    );
+
+
+                if (lostResponse.ok) {
+
+
+                    const lostData =
+                        await lostResponse.json();
+
+
+                    const lostList =
+                        Array.isArray(lostData)
+                            ? lostData
+                            : lostData.reports || [];
+
+
+                    document
+                        .getElementById(
+                            "lostFoundCount"
+                        )
+                        .textContent =
+                            lostList.length;
+
+                }
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Dashboard data error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* ==========================================
+           RECENT ACTIVITY
+        ========================================== */
+
+        function updateActivity(
+            problems
+        ) {
+
+
+            const activityContainer =
+                document.getElementById(
+                    "recentActivity"
+                );
+
+
+            if (
+                !problems ||
+                problems.length === 0
+            ) {
+
+
+                activityContainer.innerHTML = `
+
+                    <div class="activity-item">
+
+                        <div class="activity-dot"></div>
+
+                        <div class="activity-content">
+
+                            <strong>
+                                No complaints yet
+                            </strong>
+
+                            <small>
+                                Your recent activities will appear here.
+                            </small>
+
+                        </div>
+
+                        <span class="activity-status">
+                            —
+                        </span>
+
+                    </div>
+
+                `;
+
+
+                return;
+
+            }
+
+
+            const recentProblems =
+                problems
+                    .slice(-5)
+                    .reverse();
+
+
+            activityContainer.innerHTML =
+
+                recentProblems
+                    .map(
+                        problem => {
+
+
+                            const title =
+                                problem.title ||
+                                problem.subject ||
+                                problem.category ||
+                                "Campus Complaint";
+
+
+                            const status =
+                                problem.status ||
+                                "Submitted";
+
+
+                            return `
+
+                                <div class="activity-item">
+
+                                    <div class="activity-dot"></div>
+
+                                    <div class="activity-content">
+
+                                        <strong>
+                                            ${title}
+                                        </strong>
+
+                                        <small>
+                                            Complaint submitted
+                                        </small>
+
+                                    </div>
+
+                                    <span class="activity-status">
+                                        ${status}
+                                    </span>
+
+                                </div>
+
+                            `;
+
+                        }
+                    )
+                    .join("");
+
+        }
+
+
+        /* ==========================================
+           LOGOUT
+        ========================================== */
+
+        function logout() {
+
+
+            localStorage.removeItem(
+                "campusconnectToken"
+            );
+
+
+            localStorage.removeItem(
+                "campusconnectUser"
+            );
+
+
+            window.location.href =
+                "index.html";
+
+        }
+
+
+        /* ==========================================
+           START
+        ========================================== */
+
+        loadDashboardData();
+
+    </script>
+
+
+</body>
+
+</html>

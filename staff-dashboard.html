@@ -1,0 +1,2686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Staff Dashboard - CampusConnect</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #111827;
+            color: #f3f4f6;
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 70px;
+            background: #1f2937;
+            border-bottom: 1px solid #374151;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #f59e0b;
+        }
+
+
+        .logo span {
+            color: #ffffff;
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+
+        .nav-links a {
+            text-decoration: none;
+            color: #d1d5db;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+
+        .nav-links a:hover {
+            color: #f59e0b;
+        }
+
+
+        .staff-badge {
+            background: #78350f;
+            color: #fbbf24;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 88%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 45px 0 70px;
+        }
+
+
+        .welcome {
+            margin-bottom: 35px;
+        }
+
+
+        .welcome h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+
+        .welcome h1 span {
+            color: #f59e0b;
+        }
+
+
+        .welcome p {
+            color: #9ca3af;
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 45px;
+        }
+
+
+        .stat-card {
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 15px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: #f59e0b;
+        }
+
+
+        .stat-card h3 {
+            color: #9ca3af;
+            font-size: 13px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+
+        .stat-number {
+            font-size: 34px;
+            font-weight: 800;
+        }
+
+
+        .total {
+            color: #60a5fa;
+        }
+
+
+        .pending {
+            color: #fbbf24;
+        }
+
+
+        .progress {
+            color: #60a5fa;
+        }
+
+
+        .resolved {
+            color: #34d399;
+        }
+
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .section {
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 35px;
+        }
+
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+
+        .section-header h2 {
+            font-size: 23px;
+        }
+
+
+        .section-header p {
+            color: #9ca3af;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           CONTROLS
+        ========================= */
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+
+        .search-box {
+            background: #111827;
+            border: 1px solid #4b5563;
+            border-radius: 9px;
+            padding: 11px 14px;
+            color: white;
+            outline: none;
+            min-width: 240px;
+        }
+
+
+        .search-box:focus {
+            border-color: #f59e0b;
+        }
+
+
+        .filter-box {
+            background: #111827;
+            border: 1px solid #4b5563;
+            border-radius: 9px;
+            padding: 11px 14px;
+            color: white;
+            outline: none;
+        }
+
+
+        .filter-box:focus {
+            border-color: #f59e0b;
+        }
+
+
+        /* =========================
+           PROBLEM LIST
+        ========================= */
+
+        .problem-list {
+            display: grid;
+            gap: 18px;
+        }
+
+
+        .problem-card {
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 14px;
+            padding: 22px;
+            transition: 0.3s;
+        }
+
+
+        .problem-card:hover {
+            border-color: #4b5563;
+        }
+
+
+        .problem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+
+        .problem-header h3 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+
+        .problem-location {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+
+        .status-badge {
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+
+        .status-badge.pending {
+            background: #78350f;
+            color: #fbbf24;
+        }
+
+
+        .status-badge.progress {
+            background: #1e3a8a;
+            color: #60a5fa;
+        }
+
+
+        .status-badge.resolved {
+            background: #064e3b;
+            color: #34d399;
+        }
+
+
+        .problem-meta {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin: 17px 0;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+
+        .problem-description {
+            color: #d1d5db;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 17px;
+        }
+
+
+        .problem-reporter {
+            background: #1f2937;
+            border-radius: 8px;
+            padding: 11px 13px;
+            color: #d1d5db;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+
+        .problem-reporter strong {
+            color: #f59e0b;
+        }
+
+
+        .problem-reporter span {
+            color: #9ca3af;
+        }
+
+
+        .problem-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            align-items: center;
+        }
+
+
+        .status-select {
+            background: #1f2937;
+            color: white;
+            border: 1px solid #4b5563;
+            padding: 10px 12px;
+            border-radius: 8px;
+            outline: none;
+        }
+
+
+        .status-select:focus {
+            border-color: #f59e0b;
+        }
+
+
+        .update-btn {
+            background: #f59e0b;
+            color: #111827;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+
+        .update-btn:hover {
+            background: #fbbf24;
+            transform: translateY(-1px);
+        }
+
+
+        .update-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+
+        /* =========================
+           LOST & FOUND
+        ========================= */
+
+        .item-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+
+        .item-card {
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 14px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+
+        .item-card:hover {
+            border-color: #4b5563;
+            transform: translateY(-2px);
+        }
+
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+
+        .item-card h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+
+        .item-location {
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+
+        .item-type {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 15px;
+            background: #374151;
+            color: #d1d5db;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+
+        .item-type.lost {
+            background: #7f1d1d;
+            color: #fecaca;
+        }
+
+
+        .item-type.found {
+            background: #064e3b;
+            color: #a7f3d0;
+        }
+
+
+        .item-status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+
+        .item-status.active {
+            background: #78350f;
+            color: #fbbf24;
+        }
+
+
+        .item-status.matched {
+            background: #312e81;
+            color: #c4b5fd;
+        }
+
+
+        .item-status.resolved {
+            background: #064e3b;
+            color: #34d399;
+        }
+
+
+        .item-description {
+            color: #d1d5db;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 14px 0;
+        }
+
+
+        .item-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            color: #9ca3af;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+
+        .item-reporter {
+            background: #1f2937;
+            border-radius: 8px;
+            padding: 11px 13px;
+            color: #d1d5db;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+
+        .item-reporter strong {
+            color: #f59e0b;
+        }
+
+
+        .item-reporter span {
+            color: #9ca3af;
+        }
+
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+
+        .item-status-select {
+            flex: 1;
+            background: #1f2937;
+            color: white;
+            border: 1px solid #4b5563;
+            padding: 10px 12px;
+            border-radius: 8px;
+            outline: none;
+        }
+
+
+        .item-status-select:focus {
+            border-color: #f59e0b;
+        }
+
+
+        .item-update-btn {
+            background: #f59e0b;
+            color: #111827;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+
+        .item-update-btn:hover {
+            background: #fbbf24;
+            transform: translateY(-1px);
+        }
+
+
+        .item-update-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+           LOADING / EMPTY
+        ========================= */
+
+        .loading {
+            text-align: center;
+            padding: 35px;
+            color: #9ca3af;
+        }
+
+
+        .empty {
+            text-align: center;
+            padding: 35px;
+            color: #9ca3af;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .item-list {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 92%;
+                padding-top: 30px;
+            }
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .welcome h1 {
+                font-size: 30px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .search-box {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .problem-header {
+                flex-direction: column;
+            }
+
+            .problem-actions,
+            .item-actions {
+                justify-content: flex-start;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .status-select,
+            .update-btn,
+            .item-status-select,
+            .item-update-btn {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Campus<span>Connect</span>
+        </div>
+
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="staff-dashboard.html">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="#problems">
+                    Problems
+                </a>
+            </li>
+
+            <li>
+                <a href="#lost-found">
+                    Lost & Found
+                </a>
+            </li>
+
+            <li>
+                <a href="profile.html">
+                    Profile
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="staff-badge">
+            STAFF MANAGEMENT PANEL
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="container">
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <h1>
+                Staff <span>Dashboard.</span>
+            </h1>
+
+            <p>
+                Manage campus problems and monitor Lost & Found reports.
+            </p>
+
+        </div>
+
+
+
+        <!-- =========================
+             STATS
+        ========================== -->
+
+        <div class="stats">
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Problems
+                </h3>
+
+                <div
+                    class="stat-number total"
+                    id="totalProblems"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Pending
+                </h3>
+
+                <div
+                    class="stat-number pending"
+                    id="pendingProblems"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <h3>
+                    In Progress
+                </h3>
+
+                <div
+                    class="stat-number progress"
+                    id="inProgressProblems"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Resolved
+                </h3>
+
+                <div
+                    class="stat-number resolved"
+                    id="resolvedProblems"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             CAMPUS PROBLEMS
+        ========================== -->
+
+        <section
+            class="section"
+            id="problems"
+        >
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Campus Problems
+                    </h2>
+
+                    <p>
+                        Review and update student-reported problems.
+                    </p>
+
+                </div>
+
+
+                <div class="controls">
+
+                    <input
+                        type="text"
+                        id="problemSearch"
+                        class="search-box"
+                        placeholder="Search problems..."
+                    >
+
+
+                    <select
+                        id="problemFilter"
+                        class="filter-box"
+                    >
+
+                        <option value="All">
+                            All Status
+                        </option>
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="In Progress">
+                            In Progress
+                        </option>
+
+                        <option value="Resolved">
+                            Resolved
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="problemList"
+                class="problem-list"
+            >
+
+                <div class="loading">
+                    Loading campus problems...
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             LOST & FOUND
+        ========================== -->
+
+        <section
+            class="section"
+            id="lost-found"
+        >
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Lost & Found
+                    </h2>
+
+                    <p>
+                        Manage reported lost and found items.
+                    </p>
+
+                </div>
+
+
+                <div class="controls">
+
+                    <input
+                        type="text"
+                        id="itemSearch"
+                        class="search-box"
+                        placeholder="Search items..."
+                    >
+
+
+                    <select
+                        id="itemFilter"
+                        class="filter-box"
+                    >
+
+                        <option value="all">
+                            All
+                        </option>
+
+                        <option value="lost">
+                            Lost
+                        </option>
+
+                        <option value="found">
+                            Found
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="lostItems"
+                class="item-list"
+            >
+
+                <div
+                    class="loading"
+                    style="grid-column:1/-1;"
+                >
+                    Loading Lost & Found reports...
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        // ==========================================
+        // API
+        // ==========================================
+
+        const API_URL =
+            "http://127.0.0.1:5000";
+
+
+        const token =
+            localStorage.getItem(
+                "campusconnectToken"
+            );
+
+
+        // ==========================================
+        // LOGIN CHECK
+        // ==========================================
+
+        if (!token) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        // ==========================================
+        // GLOBAL DATA
+        // ==========================================
+
+        let allProblems = [];
+
+        let allLostFound = [];
+
+
+
+        // ==========================================
+        // ESCAPE HTML
+        // ==========================================
+
+        function escapeHTML(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+                return "";
+            }
+
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+
+        // ==========================================
+        // HANDLE AUTH ERROR
+        // ==========================================
+
+        function handleAuthError() {
+
+            localStorage.removeItem(
+                "campusconnectToken"
+            );
+
+            localStorage.removeItem(
+                "campusconnectUser"
+            );
+
+            alert(
+                "Session expired. Please login again."
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+
+        // ==========================================
+        // PROBLEM STATUS CLASS
+        // ==========================================
+
+        function getStatusClass(status) {
+
+            if (status === "Pending") {
+                return "pending";
+            }
+
+
+            if (status === "In Progress") {
+                return "progress";
+            }
+
+
+            if (status === "Resolved") {
+                return "resolved";
+            }
+
+
+            return "pending";
+
+        }
+
+
+
+        // ==========================================
+        // LOAD ALL PROBLEMS
+        // ==========================================
+
+        async function loadProblems() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/problems`,
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    `Bearer ${token}`
+                            }
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    if (
+                        response.status === 401
+                    ) {
+
+                        handleAuthError();
+                        return;
+
+                    }
+
+
+                    if (
+                        response.status === 403
+                    ) {
+
+                        alert(
+                            "Staff access required."
+                        );
+
+                        window.location.href =
+                            "dashboard.html";
+
+                        return;
+
+                    }
+
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to load problems"
+                    );
+
+                }
+
+
+                allProblems =
+                    data.problems || [];
+
+
+                updateProblemStats();
+
+
+                displayProblems(
+                    allProblems
+                );
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Load Problems Error:",
+                    error
+                );
+
+
+                const problemList =
+                    document.getElementById(
+                        "problemList"
+                    );
+
+
+                problemList.innerHTML = `
+
+                    <div class="empty">
+
+                        Failed to load campus problems.
+
+                        <br><br>
+
+                        Please make sure the backend
+                        server is running.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // UPDATE PROBLEM STATS
+        // ==========================================
+
+        function updateProblemStats() {
+
+            const total =
+                allProblems.length;
+
+
+            const pending =
+                allProblems.filter(
+                    problem =>
+                        problem.status === "Pending"
+                ).length;
+
+
+            const inProgress =
+                allProblems.filter(
+                    problem =>
+                        problem.status === "In Progress"
+                ).length;
+
+
+            const resolved =
+                allProblems.filter(
+                    problem =>
+                        problem.status === "Resolved"
+                ).length;
+
+
+            document.getElementById(
+                "totalProblems"
+            ).textContent = total;
+
+
+            document.getElementById(
+                "pendingProblems"
+            ).textContent = pending;
+
+
+            document.getElementById(
+                "inProgressProblems"
+            ).textContent = inProgress;
+
+
+            document.getElementById(
+                "resolvedProblems"
+            ).textContent = resolved;
+
+        }
+
+
+
+        // ==========================================
+        // DISPLAY PROBLEMS
+        // ==========================================
+
+        function displayProblems(
+            problems
+        ) {
+
+            const problemList =
+                document.getElementById(
+                    "problemList"
+                );
+
+
+            if (
+                !problems ||
+                problems.length === 0
+            ) {
+
+                problemList.innerHTML = `
+
+                    <div class="empty">
+
+                        No campus problems found.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            problemList.innerHTML =
+                problems.map(
+                    problem => {
+
+                        const status =
+                            problem.status ||
+                            "Pending";
+
+
+                        const statusClass =
+                            getStatusClass(
+                                status
+                            );
+
+
+                        const reporter =
+                            problem.reportedBy ||
+                            {};
+
+
+                        const reporterName =
+                            reporter.fullName ||
+                            "Unknown Student";
+
+
+                        const collegeId =
+                            reporter.collegeId ||
+                            "N/A";
+
+
+                        const category =
+                            problem.category ||
+                            "General";
+
+
+                        const priority =
+                            problem.priority ||
+                            "Medium";
+
+
+                        const location =
+                            problem.location ||
+                            "Unknown";
+
+
+                        const title =
+                            problem.title ||
+                            "Untitled Problem";
+
+
+                        const description =
+                            problem.description ||
+                            "";
+
+
+
+                        return `
+
+                            <div
+                                class="problem-card"
+                                data-id="${escapeHTML(
+                                    problem._id
+                                )}"
+                                data-status="${escapeHTML(
+                                    status
+                                )}"
+                            >
+
+
+                                <div class="problem-header">
+
+
+                                    <div>
+
+                                        <h3>
+                                            ${escapeHTML(
+                                                title
+                                            )}
+                                        </h3>
+
+
+                                        <p class="problem-location">
+
+                                            📍
+                                            ${escapeHTML(
+                                                location
+                                            )}
+
+                                        </p>
+
+                                    </div>
+
+
+
+                                    <span
+                                        class="status-badge ${statusClass}"
+                                    >
+
+                                        ${escapeHTML(
+                                            status
+                                        )}
+
+                                    </span>
+
+
+                                </div>
+
+
+
+                                <div class="problem-meta">
+
+                                    <span>
+                                        📂
+                                        ${escapeHTML(
+                                            category
+                                        )}
+                                    </span>
+
+
+                                    <span>
+                                        ⚡
+                                        ${escapeHTML(
+                                            priority
+                                        )}
+                                    </span>
+
+                                </div>
+
+
+
+                                <p class="problem-description">
+
+                                    ${escapeHTML(
+                                        description
+                                    )}
+
+                                </p>
+
+
+
+                                <div class="problem-reporter">
+
+                                    <strong>
+                                        Reported By:
+                                    </strong>
+
+                                    ${escapeHTML(
+                                        reporterName
+                                    )}
+
+                                    <span>
+                                        (
+                                        ${escapeHTML(
+                                            collegeId
+                                        )}
+                                        )
+                                    </span>
+
+                                </div>
+
+
+
+                                <div class="problem-actions">
+
+
+                                    <select
+                                        class="status-select"
+                                    >
+
+                                        <option
+                                            value="Pending"
+                                            ${
+                                                status ===
+                                                "Pending"
+                                                    ? "selected"
+                                                    : ""
+                                            }
+                                        >
+                                            Pending
+                                        </option>
+
+
+                                        <option
+                                            value="In Progress"
+                                            ${
+                                                status ===
+                                                "In Progress"
+                                                    ? "selected"
+                                                    : ""
+                                            }
+                                        >
+                                            In Progress
+                                        </option>
+
+
+                                        <option
+                                            value="Resolved"
+                                            ${
+                                                status ===
+                                                "Resolved"
+                                                    ? "selected"
+                                                    : ""
+                                            }
+                                        >
+                                            Resolved
+                                        </option>
+
+                                    </select>
+
+
+
+                                    <button
+                                        class="update-btn"
+                                        onclick="updateProblem(this)"
+                                    >
+                                        Update Status
+                                    </button>
+
+
+                                </div>
+
+
+                            </div>
+
+                        `;
+
+                    }
+                ).join("");
+
+        }
+
+
+
+        // ==========================================
+        // UPDATE PROBLEM
+        // ==========================================
+
+        async function updateProblem(
+            button
+        ) {
+
+            const card =
+                button.closest(
+                    ".problem-card"
+                );
+
+
+            if (!card) {
+                return;
+            }
+
+
+            const problemId =
+                card.dataset.id;
+
+
+            const select =
+                card.querySelector(
+                    ".status-select"
+                );
+
+
+            const newStatus =
+                select.value;
+
+
+            if (!problemId) {
+
+                alert(
+                    "Problem ID not found."
+                );
+
+                return;
+
+            }
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Updating...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/problems/${problemId}/status`,
+                        {
+                            method: "PATCH",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            },
+
+                            body: JSON.stringify({
+                                status:
+                                    newStatus
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    if (
+                        response.status === 401
+                    ) {
+
+                        handleAuthError();
+                        return;
+
+                    }
+
+
+                    if (
+                        response.status === 403
+                    ) {
+
+                        alert(
+                            "Only staff can update problem status."
+                        );
+
+                        return;
+
+                    }
+
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to update status"
+                    );
+
+                }
+
+
+
+                const problem =
+                    allProblems.find(
+                        item =>
+                            item._id ===
+                            problemId
+                    );
+
+
+                if (problem) {
+
+                    problem.status =
+                        newStatus;
+
+                }
+
+
+
+                updateProblemStats();
+
+
+
+                const badge =
+                    card.querySelector(
+                        ".status-badge"
+                    );
+
+
+                if (badge) {
+
+                    badge.textContent =
+                        newStatus;
+
+
+                    badge.className =
+                        `status-badge ${getStatusClass(
+                            newStatus
+                        )}`;
+
+                }
+
+
+
+                card.dataset.status =
+                    newStatus;
+
+
+
+                alert(
+                    "Problem status updated successfully! ✅"
+                );
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Update Status Error:",
+                    error
+                );
+
+
+                alert(
+                    error.message ||
+                    "Failed to update problem status."
+                );
+
+            }
+
+
+            finally {
+
+                button.disabled =
+                    false;
+
+                button.textContent =
+                    "Update Status";
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // SEARCH + FILTER PROBLEMS
+        // ==========================================
+
+        function applyProblemFilters() {
+
+            const searchInput =
+                document.getElementById(
+                    "problemSearch"
+                );
+
+
+            const filter =
+                document.getElementById(
+                    "problemFilter"
+                );
+
+
+            const searchText =
+                searchInput
+                    ? searchInput.value
+                        .toLowerCase()
+                        .trim()
+                    : "";
+
+
+            const selectedStatus =
+                filter
+                    ? filter.value
+                    : "All";
+
+
+
+            const filtered =
+                allProblems.filter(
+                    problem => {
+
+                        const reporter =
+                            problem.reportedBy ||
+                            {};
+
+
+                        const searchableText =
+                            (
+                                (problem.title || "") +
+                                " " +
+                                (problem.description || "") +
+                                " " +
+                                (problem.location || "") +
+                                " " +
+                                (problem.category || "") +
+                                " " +
+                                (reporter.fullName || "") +
+                                " " +
+                                (reporter.collegeId || "")
+                            ).toLowerCase();
+
+
+                        const matchesSearch =
+                            searchableText.includes(
+                                searchText
+                            );
+
+
+                        const matchesStatus =
+                            selectedStatus === "All" ||
+                            problem.status ===
+                                selectedStatus;
+
+
+                        return (
+                            matchesSearch &&
+                            matchesStatus
+                        );
+
+                    }
+                );
+
+
+            displayProblems(
+                filtered
+            );
+
+        }
+
+
+
+        function searchProblems() {
+
+            applyProblemFilters();
+
+        }
+
+
+
+        function filterProblems() {
+
+            applyProblemFilters();
+
+        }
+
+
+
+        // ==========================================
+        // LOAD LOST & FOUND
+        // ==========================================
+
+        async function loadLostFound() {
+
+            const lostItems =
+                document.getElementById(
+                    "lostItems"
+                );
+
+
+            try {
+
+                lostItems.innerHTML = `
+
+                    <div
+                        class="loading"
+                        style="grid-column:1/-1;"
+                    >
+                        Loading Lost & Found reports...
+                    </div>
+
+                `;
+
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/lost-found`,
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    `Bearer ${token}`
+                            }
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    if (
+                        response.status === 401
+                    ) {
+
+                        handleAuthError();
+                        return;
+
+                    }
+
+
+                    if (
+                        response.status === 403
+                    ) {
+
+                        alert(
+                            "Staff access required."
+                        );
+
+                        window.location.href =
+                            "dashboard.html";
+
+                        return;
+
+                    }
+
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to load Lost & Found reports"
+                    );
+
+                }
+
+
+                allLostFound =
+                    data.reports || [];
+
+
+                displayLostFound(
+                    allLostFound
+                );
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Load Lost & Found Error:",
+                    error
+                );
+
+
+                lostItems.innerHTML = `
+
+                    <div
+                        class="empty"
+                        style="grid-column:1/-1;"
+                    >
+
+                        Failed to load Lost & Found reports.
+
+                        <br><br>
+
+                        Please make sure the backend
+                        server is running.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // LOST & FOUND STATUS CLASS
+        // ==========================================
+
+        function getLostFoundStatusClass(
+            status
+        ) {
+
+            if (status === "Matched") {
+                return "matched";
+            }
+
+
+            if (status === "Resolved") {
+                return "resolved";
+            }
+
+
+            return "active";
+
+        }
+
+
+
+        // ==========================================
+        // DISPLAY LOST & FOUND
+        // ==========================================
+
+        function displayLostFound(
+            reports
+        ) {
+
+            const lostItems =
+                document.getElementById(
+                    "lostItems"
+                );
+
+
+            if (
+                !reports ||
+                reports.length === 0
+            ) {
+
+                lostItems.innerHTML = `
+
+                    <div
+                        class="empty"
+                        style="grid-column:1/-1;"
+                    >
+
+                        No Lost & Found reports found.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            lostItems.innerHTML =
+                reports.map(
+                    item => {
+
+                        const reportType =
+                            item.reportType ||
+                            "Lost";
+
+
+                        const status =
+                            item.status ||
+                            "Active";
+
+
+                        const reporter =
+                            item.reportedBy ||
+                            {};
+
+
+                        const reporterName =
+                            reporter.fullName ||
+                            "Unknown Student";
+
+
+                        const collegeId =
+                            reporter.collegeId ||
+                            "N/A";
+
+
+                        const category =
+                            item.category ||
+                            "Other";
+
+
+                        const itemName =
+                            item.itemName ||
+                            "Unnamed Item";
+
+
+                        const location =
+                            item.location ||
+                            "Unknown";
+
+
+                        const description =
+                            item.description ||
+                            "";
+
+
+                        const formattedDate =
+                            item.date
+                                ? new Date(
+                                    item.date
+                                ).toLocaleDateString(
+                                    "en-IN",
+                                    {
+                                        day: "numeric",
+                                        month: "short",
+                                        year: "numeric"
+                                    }
+                                )
+                                : "N/A";
+
+
+                        const typeClass =
+                            reportType
+                                .toLowerCase();
+
+
+                        const statusClass =
+                            getLostFoundStatusClass(
+                                status
+                            );
+
+
+
+                        return `
+
+                            <div
+                                class="item-card"
+                                data-id="${escapeHTML(
+                                    item._id
+                                )}"
+                                data-type="${escapeHTML(
+                                    reportType
+                                )}"
+                            >
+
+
+                                <div class="item-header">
+
+
+                                    <div>
+
+                                        <h3>
+                                            ${escapeHTML(
+                                                itemName
+                                            )}
+                                        </h3>
+
+
+                                        <p class="item-location">
+
+                                            📍
+                                            ${escapeHTML(
+                                                location
+                                            )}
+
+                                        </p>
+
+                                    </div>
+
+
+                                    <span
+                                        class="item-type ${typeClass}"
+                                    >
+
+                                        ${escapeHTML(
+                                            reportType
+                                        )}
+
+                                    </span>
+
+
+                                </div>
+
+
+
+                                <span
+                                    class="item-status ${statusClass}"
+                                >
+
+                                    ${escapeHTML(
+                                        status
+                                    )}
+
+                                </span>
+
+
+
+                                <p class="item-description">
+
+                                    ${escapeHTML(
+                                        description
+                                    )}
+
+                                </p>
+
+
+
+                                <div class="item-meta">
+
+                                    <span>
+                                        🏷️
+                                        ${escapeHTML(
+                                            category
+                                        )}
+                                    </span>
+
+
+                                    <span>
+                                        📅
+                                        ${escapeHTML(
+                                            formattedDate
+                                        )}
+                                    </span>
+
+                                </div>
+
+
+
+                                <div class="item-reporter">
+
+                                    <strong>
+                                        Reported By:
+                                    </strong>
+
+                                    ${escapeHTML(
+                                        reporterName
+                                    )}
+
+                                    <span>
+                                        (
+                                        ${escapeHTML(
+                                            collegeId
+                                        )}
+                                        )
+                                    </span>
+
+                                </div>
+
+
+
+                                <div class="item-actions">
+
+
+                                    <select
+                                        class="item-status-select"
+                                    >
+
+                                        <option
+                                            value="Active"
+                                            ${
+                                                status ===
+                                                "Active"
+                                                    ? "selected"
+                                                    : ""
+                                            }
+                                        >
+                                            Active
+                                        </option>
+
+
+                                        <option
+                                            value="Matched"
+                                            ${
+                                                status ===
+                                                "Matched"
+                                                    ? "selected"
+                                                    : ""
+                                            }
+                                        >
+                                            Matched
+                                        </option>
+
+
+                                        <option
+                                            value="Resolved"
+                                            ${
+                                                status ===
+                                                "Resolved"
+                                                    ? "selected"
+                                                    : ""
+                                            }
+                                        >
+                                            Resolved
+                                        </option>
+
+                                    </select>
+
+
+
+                                    <button
+                                        class="item-update-btn"
+                                        onclick="updateLostFound(this)"
+                                    >
+                                        Update Status
+                                    </button>
+
+
+                                </div>
+
+
+                            </div>
+
+                        `;
+
+                    }
+                ).join("");
+
+        }
+
+
+
+        // ==========================================
+        // UPDATE LOST & FOUND STATUS
+        // ==========================================
+
+        async function updateLostFound(
+            button
+        ) {
+
+            const card =
+                button.closest(
+                    ".item-card"
+                );
+
+
+            if (!card) {
+                return;
+            }
+
+
+            const reportId =
+                card.dataset.id;
+
+
+            const select =
+                card.querySelector(
+                    ".item-status-select"
+                );
+
+
+            const newStatus =
+                select.value;
+
+
+            if (!reportId) {
+
+                alert(
+                    "Report ID not found."
+                );
+
+                return;
+
+            }
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Updating...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/lost-found/${reportId}/status`,
+                        {
+                            method: "PATCH",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            },
+
+                            body: JSON.stringify({
+
+                                status:
+                                    newStatus
+
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    if (
+                        response.status === 401
+                    ) {
+
+                        handleAuthError();
+                        return;
+
+                    }
+
+
+                    if (
+                        response.status === 403
+                    ) {
+
+                        alert(
+                            "Only staff can update Lost & Found status."
+                        );
+
+                        return;
+
+                    }
+
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to update Lost & Found status"
+                    );
+
+                }
+
+
+
+                const report =
+                    allLostFound.find(
+                        item =>
+                            item._id ===
+                            reportId
+                    );
+
+
+                if (report) {
+
+                    report.status =
+                        newStatus;
+
+                }
+
+
+
+                displayLostFound(
+                    allLostFound
+                );
+
+
+
+                alert(
+                    "Lost & Found status updated successfully! ✅"
+                );
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Update Lost & Found Error:",
+                    error
+                );
+
+
+                alert(
+                    error.message ||
+                    "Failed to update Lost & Found status."
+                );
+
+            }
+
+
+            finally {
+
+                button.disabled =
+                    false;
+
+                button.textContent =
+                    "Update Status";
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // SEARCH + FILTER LOST & FOUND
+        // ==========================================
+
+        function applyItemFilters() {
+
+            const searchInput =
+                document.getElementById(
+                    "itemSearch"
+                );
+
+
+            const filter =
+                document.getElementById(
+                    "itemFilter"
+                );
+
+
+            const searchText =
+                searchInput
+                    ? searchInput.value
+                        .toLowerCase()
+                        .trim()
+                    : "";
+
+
+            const selectedType =
+                filter
+                    ? filter.value.toLowerCase()
+                    : "all";
+
+
+
+            const filtered =
+                allLostFound.filter(
+                    item => {
+
+                        const reporter =
+                            item.reportedBy ||
+                            {};
+
+
+                        const searchableText =
+                            (
+                                (item.itemName || "") +
+                                " " +
+                                (item.description || "") +
+                                " " +
+                                (item.location || "") +
+                                " " +
+                                (item.category || "") +
+                                " " +
+                                (item.reportType || "") +
+                                " " +
+                                (reporter.fullName || "") +
+                                " " +
+                                (reporter.collegeId || "")
+                            ).toLowerCase();
+
+
+                        const matchesSearch =
+                            searchableText.includes(
+                                searchText
+                            );
+
+
+                        const matchesType =
+                            selectedType === "all" ||
+                            String(
+                                item.reportType || ""
+                            ).toLowerCase() ===
+                                selectedType;
+
+
+                        return (
+                            matchesSearch &&
+                            matchesType
+                        );
+
+                    }
+                );
+
+
+            displayLostFound(
+                filtered
+            );
+
+        }
+
+
+
+        function searchItems() {
+
+            applyItemFilters();
+
+        }
+
+
+
+        function filterItems() {
+
+            applyItemFilters();
+
+        }
+
+
+
+        // ==========================================
+        // PAGE LOAD
+        // ==========================================
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => {
+
+
+                loadProblems();
+
+                loadLostFound();
+
+
+
+                const problemSearch =
+                    document.getElementById(
+                        "problemSearch"
+                    );
+
+
+                if (problemSearch) {
+
+                    problemSearch.addEventListener(
+                        "input",
+                        searchProblems
+                    );
+
+                }
+
+
+
+                const problemFilter =
+                    document.getElementById(
+                        "problemFilter"
+                    );
+
+
+                if (problemFilter) {
+
+                    problemFilter.addEventListener(
+                        "change",
+                        filterProblems
+                    );
+
+                }
+
+
+
+                const itemSearch =
+                    document.getElementById(
+                        "itemSearch"
+                    );
+
+
+                if (itemSearch) {
+
+                    itemSearch.addEventListener(
+                        "input",
+                        searchItems
+                    );
+
+                }
+
+
+
+                const itemFilter =
+                    document.getElementById(
+                        "itemFilter"
+                    );
+
+
+                if (itemFilter) {
+
+                    itemFilter.addEventListener(
+                        "change",
+                        filterItems
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

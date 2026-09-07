@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Campus Problems | CampusConnect</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* PAGE */
+        .problems-page {
+            min-height: 100vh;
+            background: #080b18;
+            color: #f8fafc;
+        }
+
+        /* NAVBAR */
+        .problem-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(8, 11, 24, 0.94);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(167, 139, 250, 0.12);
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .problem-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 21px;
+            font-weight: 800;
+            color: #f8fafc;
+        }
+
+        .problem-logo span span {
+            color: #a78bfa;
+        }
+
+        .problem-logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #7c3aed, #2dd4bf);
+            color: white;
+            font-weight: 900;
+        }
+
+        .problem-nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .problem-nav-links a {
+            color: #aeb7cc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .problem-nav-links a:hover,
+        .problem-nav-links a.active {
+            color: #a78bfa;
+        }
+
+        .problem-profile {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #7c3aed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+        }
+
+        /* MAIN */
+        .problems-container {
+            width: 88%;
+            max-width: 1250px;
+            margin: auto;
+            padding: 55px 0 80px;
+        }
+
+        /* HEADER */
+        .problems-heading {
+            margin-bottom: 35px;
+        }
+
+        .problems-label {
+            display: inline-block;
+            color: #a78bfa;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .problems-heading h1 {
+            font-size: 42px;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .problems-heading h1 span {
+            color: #a78bfa;
+        }
+
+        .problems-heading p {
+            max-width: 650px;
+            color: #9ca8bd;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* GRID */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* CARD */
+        .problem-card {
+            background: #111529;
+            border: 1px solid rgba(167, 139, 250, 0.13);
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(124, 58, 237, 0.16);
+            color: #a78bfa;
+            font-size: 22px;
+        }
+
+        .card-title h2 {
+            font-size: 21px;
+            margin: 0;
+        }
+
+        .card-title p {
+            margin: 4px 0 0;
+            color: #8994aa;
+            font-size: 12px;
+        }
+
+        /* FORM */
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d8deeb;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px 14px;
+            border-radius: 11px;
+            border: 1px solid #293149;
+            background: #090d1c;
+            color: #f8fafc;
+            outline: none;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+        }
+
+        .form-group textarea {
+            min-height: 115px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .submit-problem {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 5px;
+        }
+
+        .submit-problem:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.28);
+        }
+
+        /* REPORTS */
+        .reports-card {
+            min-height: 100%;
+        }
+
+        .report-item {
+            background: #0b1020;
+            border: 1px solid #20283c;
+            border-radius: 15px;
+            padding: 17px;
+            margin-bottom: 13px;
+            transition: 0.3s;
+        }
+
+        .report-item:hover {
+            border-color: #3b4661;
+            transform: translateY(-2px);
+        }
+
+        .report-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .report-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+
+        .status {
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .status.pending {
+            background: rgba(251, 113, 133, 0.12);
+            color: #fb7185;
+        }
+
+        .status.progress {
+            background: rgba(167, 139, 250, 0.13);
+            color: #a78bfa;
+        }
+
+        .status.resolved {
+            background: rgba(45, 212, 191, 0.12);
+            color: #2dd4bf;
+        }
+
+        .report-description {
+            color: #8d98ad;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .report-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            color: #68748c;
+            font-size: 11px;
+        }
+
+        .report-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* INFO BOX */
+        .info-box {
+            margin-top: 18px;
+            padding: 15px;
+            border-radius: 13px;
+            background: rgba(45, 212, 191, 0.06);
+            border: 1px solid rgba(45, 212, 191, 0.12);
+            color: #91a4a5;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .info-box strong {
+            color: #2dd4bf;
+        }
+
+        /* FOOTER */
+        .problem-footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid rgba(167, 139, 250, 0.1);
+            color: #68748c;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 850px) {
+            .problem-nav-links {
+                display: none;
+            }
+
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .problems-heading h1 {
+                font-size: 34px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .problems-container {
+                width: 92%;
+                padding-top: 35px;
+            }
+
+            .problem-card {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .problem-profile {
+                width: 38px;
+                height: 38px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="problems-page">
+
+    <!-- NAVBAR -->
+    <header class="problem-nav">
+
+        <div class="problem-logo">
+            <div class="problem-logo-icon">C</div>
+            <span>Campus<span>Connect</span></span>
+        </div>
+
+        <nav class="problem-nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="campus-problems.html" class="active">Problems</a>
+            <a href="lost-found.html">Lost & Found</a>
+            <a href="profile.html">Profile</a>
+        </nav>
+
+        <div class="problem-profile">
+            HM
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="problems-container">
+
+        <!-- HEADING -->
+        <section class="problems-heading">
+
+            <span class="problems-label">
+                CAMPUS SUPPORT
+            </span>
+
+            <h1>
+                Report Campus <span>Problems.</span>
+            </h1>
+
+            <p>
+                Found an issue on campus? Report it here and
+                track its progress until it gets resolved.
+            </p>
+
+        </section>
+
+
+        <!-- CONTENT -->
+        <div class="problem-grid">
+
+
+            <!-- REPORT FORM -->
+            <div class="problem-card">
+
+                <div class="card-title">
+
+                    <div class="card-icon">
+                        ⚠
+                    </div>
+
+                    <div>
+                        <h2>Report a Problem</h2>
+                        <p>Tell us what needs attention.</p>
+                    </div>
+
+                </div>
+
+
+                <form id="problemForm">
+
+                    <!-- CATEGORY + PRIORITY -->
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="category">
+                                Problem Category
+                            </label>
+
+                            <select id="category" required>
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option>
+                                    Classroom
+                                </option>
+
+                                <option>
+                                    Laboratory
+                                </option>
+
+                                <option>
+                                    Wi-Fi / Internet
+                                </option>
+
+                                <option>
+                                    Electrical
+                                </option>
+
+                                <option>
+                                    Furniture
+                                </option>
+
+                                <option>
+                                    Water / Washroom
+                                </option>
+
+                                <option>
+                                    Infrastructure
+                                </option>
+
+                                <option>
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="priority">
+                                Priority
+                            </label>
+
+                            <select id="priority" required>
+
+                                <option value="">
+                                    Select priority
+                                </option>
+
+                                <option>
+                                    Low
+                                </option>
+
+                                <option>
+                                    Medium
+                                </option>
+
+                                <option>
+                                    High
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+                    <div class="form-group">
+
+                        <label for="location">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            placeholder="Example: Block A, Room 204"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- TITLE -->
+                    <div class="form-group">
+
+                        <label for="problemTitle">
+                            Problem Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="problemTitle"
+                            placeholder="Example: Classroom projector not working"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+                    <div class="form-group">
+
+                        <label for="description">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="description"
+                            placeholder="Describe the problem clearly..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="submit-problem"
+                    >
+                        Submit Problem →
+                    </button>
+
+                </form>
+
+
+                <div class="info-box">
+                    <strong>Note:</strong>
+                    Your report will be sent to the concerned
+                    staff/admin for review and resolution.
+                </div>
+
+            </div>
+
+
+            <!-- MY REPORTS -->
+            <div class="problem-card reports-card">
+
+                <div class="card-title">
+
+                    <div class="card-icon">
+                        ✓
+                    </div>
+
+                    <div>
+                        <h2>My Reports</h2>
+                        <p>Track your submitted problems.</p>
+                    </div>
+
+                </div>
+
+
+                <!-- REPORT 1 -->
+                <div class="report-item">
+
+                    <div class="report-top">
+
+                        <div class="report-title">
+                            Classroom Projector Issue
+                        </div>
+
+                        <span class="status progress">
+                            In Progress
+                        </span>
+
+                    </div>
+
+                    <p class="report-description">
+                        Projector is not displaying the screen
+                        during lectures.
+                    </p>
+
+                    <div class="report-meta">
+
+                        <span>📍 Block A • Room 204</span>
+
+                        <span>📅 Sep 5, 2026</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REPORT 2 -->
+                <div class="report-item">
+
+                    <div class="report-top">
+
+                        <div class="report-title">
+                            Wi-Fi Connectivity Problem
+                        </div>
+
+                        <span class="status pending">
+                            Pending
+                        </span>
+
+                    </div>
+
+                    <p class="report-description">
+                        Internet connection is frequently
+                        disconnecting in the laboratory.
+                    </p>
+
+                    <div class="report-meta">
+
+                        <span>📍 Computer Lab</span>
+
+                        <span>📅 Sep 4, 2026</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REPORT 3 -->
+                <div class="report-item">
+
+                    <div class="report-top">
+
+                        <div class="report-title">
+                            Broken Classroom Chair
+                        </div>
+
+                        <span class="status resolved">
+                            Resolved
+                        </span>
+
+                    </div>
+
+                    <p class="report-description">
+                        One classroom chair was damaged and
+                        needed replacement.
+                    </p>
+
+                    <div class="report-meta">
+
+                        <span>📍 Block B • Room 102</span>
+
+                        <span>📅 Sep 2, 2026</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REPORT 4 -->
+                <div class="report-item">
+
+                    <div class="report-top">
+
+                        <div class="report-title">
+                            Washroom Water Issue
+                        </div>
+
+                        <span class="status resolved">
+                            Resolved
+                        </span>
+
+                    </div>
+
+                    <p class="report-description">
+                        Water supply issue reported near the
+                        ground floor washroom.
+                    </p>
+
+                    <div class="report-meta">
+
+                        <span>📍 Main Building</span>
+
+                        <span>📅 Aug 30, 2026</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="problem-footer">
+
+        © 2026 CampusConnect • Campus Problem Management
+
+    </footer>
+
+</div>
+
+
+<script>
+
+    const API_URL = "http://127.0.0.1:5000";
+
+    const token = localStorage.getItem("campusconnectToken");
+
+    // ===============================
+    // CHECK LOGIN
+    // ===============================
+
+    if (!token) {
+        window.location.href = "login.html";
+    }
+
+
+    // ===============================
+    // SUBMIT PROBLEM
+    // ===============================
+
+    document
+        .getElementById("problemForm")
+        .addEventListener("submit", async function (event) {
+
+            event.preventDefault();
+
+            const category =
+                document.getElementById("category").value;
+
+            const priority =
+                document.getElementById("priority").value;
+
+            const location =
+                document.getElementById("location").value;
+
+            const title =
+                document.getElementById("problemTitle").value;
+
+            const description =
+                document.getElementById("description").value;
+
+
+            if (
+                !category ||
+                !priority ||
+                !location ||
+                !title ||
+                !description
+            ) {
+                alert("Please fill all fields.");
+                return;
+            }
+
+
+            const button =
+                document.querySelector(".submit-problem");
+
+            button.disabled = true;
+            button.textContent = "Submitting...";
+
+
+            try {
+
+                const response = await fetch(
+                    `${API_URL}/api/problems`,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        },
+
+                        body: JSON.stringify({
+                            category,
+                            priority,
+                            location,
+                            title,
+                            description
+                        })
+                    }
+                );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to submit problem"
+                    );
+
+                }
+
+
+                alert(
+                    "Problem submitted successfully! ✅"
+                );
+
+
+                document
+                    .getElementById("problemForm")
+                    .reset();
+
+
+                // Reload reports
+                loadMyProblems();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Problem Submission Error:",
+                    error
+                );
+
+                alert(
+                    error.message ||
+                    "Unable to submit problem."
+                );
+
+            } finally {
+
+                button.disabled = false;
+                button.textContent = "Submit Problem →";
+
+            }
+
+        });
+
+
+    // ===============================
+    // LOAD MY PROBLEMS
+    // ===============================
+
+    async function loadMyProblems() {
+
+        const reportsCard =
+            document.querySelector(".reports-card");
+
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/api/problems/my`,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
+            );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load reports"
+                );
+
+            }
+
+
+            const problems =
+                data.problems || [];
+
+
+            // Remove dummy reports
+            const oldReports =
+                reportsCard.querySelectorAll(".report-item");
+
+            oldReports.forEach(report => {
+                report.remove();
+            });
+
+
+            if (!problems.length) {
+
+                const emptyMessage =
+                    document.createElement("div");
+
+                emptyMessage.className = "report-item";
+
+                emptyMessage.innerHTML = `
+                    <div class="report-description">
+                        You haven't reported any campus problems yet.
+                    </div>
+                `;
+
+                reportsCard.appendChild(emptyMessage);
+
+                return;
+            }
+
+
+            problems.forEach(problem => {
+
+                const reportItem =
+                    document.createElement("div");
+
+                reportItem.className =
+                    "report-item";
+
+
+                const status =
+                    problem.status || "Pending";
+
+
+                let statusClass = "pending";
+
+
+                if (status === "In Progress") {
+                    statusClass = "progress";
+                }
+
+                if (status === "Resolved") {
+                    statusClass = "resolved";
+                }
+
+
+                const date =
+                    problem.createdAt
+                        ? new Date(
+                            problem.createdAt
+                        ).toLocaleDateString(
+                            "en-IN",
+                            {
+                                day: "numeric",
+                                month: "short",
+                                year: "numeric"
+                            }
+                        )
+                        : "Date unavailable";
+
+
+                reportItem.innerHTML = `
+
+                    <div class="report-top">
+
+                        <div class="report-title">
+                            ${escapeHTML(
+                                problem.title
+                            )}
+                        </div>
+
+                        <span class="status ${statusClass}">
+                            ${escapeHTML(status)}
+                        </span>
+
+                    </div>
+
+                    <p class="report-description">
+                        ${escapeHTML(
+                            problem.description
+                        )}
+                    </p>
+
+                    <div class="report-meta">
+
+                        <span>
+                            📍 ${escapeHTML(
+                                problem.location
+                            )}
+                        </span>
+
+                        <span>
+                            📅 ${date}
+                        </span>
+
+                        <span>
+                            🏷️ ${escapeHTML(
+                                problem.category
+                            )}
+                        </span>
+
+                        <span>
+                            ⚡ ${escapeHTML(
+                                problem.priority
+                            )}
+                        </span>
+
+                    </div>
+
+                `;
+
+
+                reportsCard.appendChild(
+                    reportItem
+                );
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Load Problems Error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    // ===============================
+    // SECURITY
+    // ===============================
+
+    function escapeHTML(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    // ===============================
+    // START
+    // ===============================
+
+    loadMyProblems();
+
+</script>
+
+</body>
+</html>

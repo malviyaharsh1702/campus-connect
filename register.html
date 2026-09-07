@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | CampusConnect</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .auth-page {
+            min-height: calc(100vh - 78px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 55px 20px;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(37, 99, 235, 0.12),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(16, 185, 129, 0.07),
+                    transparent 35%
+                ),
+                #070d1a;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 38px;
+
+            background: #101827;
+
+            border: 1px solid rgba(96, 165, 250, 0.13);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.35),
+                0 0 50px rgba(37, 99, 235, 0.05);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .auth-logo {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 17px;
+
+            border-radius: 15px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 23px;
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 30px rgba(37, 99, 235, 0.25);
+        }
+
+        .auth-header h1 {
+            font-size: 29px;
+            color: #f8fafc;
+            margin-bottom: 7px;
+        }
+
+        .auth-header p {
+            color: #718096;
+            font-size: 13px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+
+            color: #cbd5e1;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            background: #0b1422;
+
+            border: 1px solid rgba(148, 163, 184, 0.14);
+
+            border-radius: 9px;
+
+            outline: none;
+
+            color: #f8fafc;
+
+            font-size: 14px;
+
+            transition: 0.3s ease;
+        }
+
+        .form-group input::placeholder {
+            color: #475569;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            color: #94a3b8;
+        }
+
+        .form-group select option {
+            background: #101827;
+            color: #f8fafc;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+
+            border-color: #3b82f6;
+
+            box-shadow:
+                0 0 0 3px rgba(59, 130, 246, 0.08);
+        }
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 14px;
+        }
+
+        .password-info {
+
+            margin-top: 6px;
+
+            color: #475569;
+
+            font-size: 10px;
+        }
+
+        .terms-row {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 9px;
+
+            margin: 20px 0 22px;
+        }
+
+        .terms-row input {
+
+            width: 15px;
+            height: 15px;
+
+            margin-top: 2px;
+
+            accent-color: #2563eb;
+
+            cursor: pointer;
+
+            flex-shrink: 0;
+        }
+
+        .terms-row label {
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            cursor: pointer;
+        }
+
+        .terms-row a {
+
+            color: #60a5fa;
+
+            transition: 0.3s ease;
+        }
+
+        .terms-row a:hover {
+            color: #93c5fd;
+        }
+
+        .register-btn {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 14px;
+
+            border-radius: 9px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .register-btn:hover {
+
+            background: #3b82f6;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(37, 99, 235, 0.25);
+        }
+
+        .register-btn:disabled {
+
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+            box-shadow: none;
+        }
+
+        .auth-divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 24px 0;
+
+            color: #475569;
+
+            font-size: 11px;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: rgba(148, 163, 184, 0.10);
+        }
+
+        .login-text {
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        .login-text a {
+
+            color: #60a5fa;
+
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+        .login-text a:hover {
+            color: #93c5fd;
+        }
+
+        .back-home {
+
+            display: block;
+
+            margin-top: 20px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            transition: 0.3s ease;
+        }
+
+        .back-home:hover {
+            color: #60a5fa;
+        }
+
+        .security-note {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            margin-top: 20px;
+
+            color: #475569;
+
+            font-size: 10px;
+        }
+
+        .security-note span {
+            color: #34d399;
+        }
+
+        @media (max-width: 600px) {
+
+            .auth-page {
+                padding: 35px 16px;
+            }
+
+            .auth-container {
+                padding: 28px 22px;
+            }
+
+            .auth-header h1 {
+                font-size: 25px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <span class="logo-icon">
+                C
+            </span>
+
+            <span>
+                Campus<span>Connect</span>
+            </span>
+
+        </a>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+        </nav>
+
+
+        <div class="nav-buttons">
+
+            <a
+                href="login.html"
+                class="btn btn-outline"
+            >
+                Login
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- REGISTER -->
+
+    <main class="auth-page">
+
+        <div class="auth-container">
+
+
+            <!-- HEADER -->
+
+            <div class="auth-header">
+
+                <div class="auth-logo">
+                    C
+                </div>
+
+                <h1>
+                    Create Account
+                </h1>
+
+                <p>
+                    Join CampusConnect and stay connected
+                </p>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form id="registerForm">
+
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- EMAIL + COLLEGE ID -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="your@email.com"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="collegeId">
+                            College ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="collegeId"
+                            name="collegeId"
+                            placeholder="College ID"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACCOUNT TYPE -->
+
+                <div class="form-group">
+
+                    <label for="accountType">
+                        Account Type
+                    </label>
+
+                    <select
+                        id="accountType"
+                        name="accountType"
+                        required
+                    >
+
+                        <option value="">
+                            Select account type
+                        </option>
+
+                        <option value="student">
+                            Student
+                        </option>
+
+                        <option value="staff">
+                            Staff
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        minlength="6"
+                        required
+                    >
+
+                    <div class="password-info">
+                        Password should contain at least 6 characters.
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Confirm your password"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- TERMS -->
+
+                <div class="terms-row">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        name="terms"
+                        required
+                    >
+
+                    <label for="terms">
+
+                        I agree to the
+                        <a href="#">
+                            Terms & Conditions
+                        </a>
+                        and CampusConnect usage policy.
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- REGISTER BUTTON -->
+
+                <button
+                    type="submit"
+                    class="register-btn"
+                    id="registerButton"
+                >
+                    Create CampusConnect Account
+                </button>
+
+
+            </form>
+
+
+
+            <!-- DIVIDER -->
+
+            <div class="auth-divider">
+                OR
+            </div>
+
+
+
+            <!-- LOGIN -->
+
+            <p class="login-text">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Login here
+                </a>
+
+            </p>
+
+
+
+            <!-- HOME -->
+
+            <a
+                href="index.html"
+                class="back-home"
+            >
+                ← Back to Home
+            </a>
+
+
+
+            <!-- SECURITY -->
+
+            <div class="security-note">
+
+                <span>●</span>
+
+                Secure CampusConnect Registration
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-logo">
+
+            <span class="logo-icon">
+                C
+            </span>
+
+            Campus<span>Connect</span>
+
+        </div>
+
+
+        <p>
+            Smart campus problem reporting & lost & found system.
+        </p>
+
+
+        <span class="copyright">
+            © 2026 CampusConnect. All rights reserved.
+        </span>
+
+    </footer>
+
+
+
+    <!-- REGISTER API -->
+
+    <script>
+
+        const API_URL = "http://127.0.0.1:5000";
+
+        const registerForm =
+            document.getElementById("registerForm");
+
+        const registerButton =
+            document.getElementById("registerButton");
+
+
+        registerForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const fullName =
+                    document.getElementById("fullName").value.trim();
+
+                const email =
+                    document.getElementById("email").value.trim();
+
+                const collegeId =
+                    document.getElementById("collegeId").value.trim();
+
+                const accountType =
+                    document.getElementById("accountType").value;
+
+                const password =
+                    document.getElementById("password").value;
+
+                const confirmPassword =
+                    document.getElementById("confirmPassword").value;
+
+
+                // Check password
+
+                if (password !== confirmPassword) {
+
+                    alert("Passwords do not match.");
+
+                    return;
+
+                }
+
+
+                // Disable button
+
+                registerButton.disabled = true;
+
+                registerButton.textContent =
+                    "Creating Account...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API_URL}/api/register`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    fullName,
+                                    email,
+                                    collegeId,
+                                    accountType,
+                                    password
+
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        alert(
+                            data.message ||
+                            "Registration failed."
+                        );
+
+                        return;
+
+                    }
+
+
+                    alert(
+                        "Registration successful! You can now login."
+                    );
+
+
+                    // Go to login page
+
+                    window.location.href =
+                        "login.html";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Registration Error:",
+                        error
+                    );
+
+                    alert(
+                        "Unable to connect to the server. Make sure the backend is running."
+                    );
+
+                } finally {
+
+                    registerButton.disabled = false;
+
+                    registerButton.textContent =
+                        "Create CampusConnect Account";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

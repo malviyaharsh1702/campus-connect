@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | CampusConnect</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* ================================
+           LOGIN PAGE
+        ================================= */
+
+        .auth-page {
+
+            min-height: calc(100vh - 78px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 60px 20px;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(37, 99, 235, 0.12),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(16, 185, 129, 0.07),
+                    transparent 35%
+                ),
+                #070d1a;
+        }
+
+
+        .auth-container {
+
+            width: 100%;
+
+            max-width: 450px;
+
+            padding: 38px;
+
+            background: #101827;
+
+            border: 1px solid rgba(96, 165, 250, 0.13);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.35),
+                0 0 50px rgba(37, 99, 235, 0.05);
+        }
+
+
+        .auth-header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .auth-logo {
+
+            width: 55px;
+
+            height: 55px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 18px;
+
+            border-radius: 15px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 23px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 30px rgba(37, 99, 235, 0.25);
+        }
+
+
+        .auth-header h1 {
+
+            font-size: 29px;
+
+            color: #f8fafc;
+
+            margin-bottom: 8px;
+        }
+
+
+        .auth-header p {
+
+            color: #718096;
+
+            font-size: 13px;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 19px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #cbd5e1;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            background: #0b1422;
+
+            border: 1px solid rgba(148, 163, 184, 0.14);
+
+            border-radius: 9px;
+
+            outline: none;
+
+            color: #f8fafc;
+
+            font-size: 14px;
+
+            transition: 0.3s ease;
+        }
+
+
+        .form-group input::placeholder {
+
+            color: #475569;
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #3b82f6;
+
+            box-shadow:
+                0 0 0 3px rgba(59, 130, 246, 0.08);
+        }
+
+
+        .password-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+        }
+
+
+        .password-row label {
+
+            margin-bottom: 0;
+        }
+
+
+        .forgot-link {
+
+            color: #60a5fa;
+
+            font-size: 12px;
+
+            transition: 0.3s ease;
+        }
+
+
+        .forgot-link:hover {
+
+            color: #93c5fd;
+        }
+
+
+        .remember-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin: 4px 0 22px;
+        }
+
+
+        .remember-row input {
+
+            width: 15px;
+
+            height: 15px;
+
+            accent-color: #2563eb;
+
+            cursor: pointer;
+        }
+
+
+        .remember-row label {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            cursor: pointer;
+        }
+
+
+        .login-btn {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 14px;
+
+            border-radius: 9px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+
+        .login-btn:hover {
+
+            background: #3b82f6;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(37, 99, 235, 0.25);
+        }
+
+
+        .login-btn:disabled {
+
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        .auth-divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 25px 0;
+
+            color: #475569;
+
+            font-size: 11px;
+        }
+
+
+        .auth-divider::before,
+        .auth-divider::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: rgba(148, 163, 184, 0.10);
+        }
+
+
+        .register-text {
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        .register-text a {
+
+            color: #60a5fa;
+
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+
+        .register-text a:hover {
+
+            color: #93c5fd;
+        }
+
+
+        .back-home {
+
+            display: block;
+
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            transition: 0.3s ease;
+        }
+
+
+        .back-home:hover {
+
+            color: #60a5fa;
+        }
+
+
+        .security-note {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            margin-top: 22px;
+
+            color: #475569;
+
+            font-size: 10px;
+        }
+
+
+        .security-note span {
+
+            color: #34d399;
+        }
+
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 600px) {
+
+            .auth-page {
+
+                padding: 35px 16px;
+            }
+
+
+            .auth-container {
+
+                padding: 28px 22px;
+            }
+
+
+            .auth-header h1 {
+
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================================
+         NAVBAR
+    ================================= -->
+
+    <header class="navbar">
+
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <span class="logo-icon">
+                C
+            </span>
+
+            <span>
+                Campus<span>Connect</span>
+            </span>
+
+        </a>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+        </nav>
+
+
+        <div class="nav-buttons">
+
+            <a
+                href="register.html"
+                class="btn btn-primary"
+            >
+                Register
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================================
+         LOGIN SECTION
+    ================================= -->
+
+    <main class="auth-page">
+
+
+        <div class="auth-container">
+
+
+            <!-- HEADER -->
+
+            <div class="auth-header">
+
+
+                <div class="auth-logo">
+                    C
+                </div>
+
+
+                <h1>
+                    Welcome Back
+                </h1>
+
+
+                <p>
+                    Login to your CampusConnect account
+                </p>
+
+
+            </div>
+
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+
+                    <div class="password-row">
+
+
+                        <label for="password">
+                            Password
+                        </label>
+
+
+                        <a
+                            href="forgot-password.html"
+                            class="forgot-link"
+                        >
+                            Forgot Password?
+                        </a>
+
+
+                    </div>
+
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+
+                </div>
+
+
+
+                <!-- REMEMBER ME -->
+
+                <div class="remember-row">
+
+
+                    <input
+                        type="checkbox"
+                        id="remember"
+                        name="remember"
+                    >
+
+
+                    <label for="remember">
+                        Remember me
+                    </label>
+
+
+                </div>
+
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Login to CampusConnect
+                </button>
+
+
+            </form>
+
+
+
+            <!-- DIVIDER -->
+
+            <div class="auth-divider">
+                OR
+            </div>
+
+
+
+            <!-- REGISTER -->
+
+            <p class="register-text">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Create Account
+                </a>
+
+            </p>
+
+
+
+            <!-- BACK HOME -->
+
+            <a
+                href="index.html"
+                class="back-home"
+            >
+                ← Back to Home
+            </a>
+
+
+
+            <!-- SECURITY -->
+
+            <div class="security-note">
+
+                <span>●</span>
+
+                Secure CampusConnect Login
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- ================================
+         FOOTER
+    ================================= -->
+
+    <footer>
+
+
+        <div class="footer-logo">
+
+
+            <span class="logo-icon">
+                C
+            </span>
+
+
+            Campus<span>Connect</span>
+
+
+        </div>
+
+
+        <p>
+            Smart campus problem reporting & lost & found system.
+        </p>
+
+
+        <span class="copyright">
+            © 2026 CampusConnect. All rights reserved.
+        </span>
+
+
+    </footer>
+
+
+
+    <!-- ================================
+         LOGIN JAVASCRIPT
+    ================================= -->
+
+    <script>
+
+
+        // ==========================================
+        // BACKEND URL
+        // ==========================================
+
+        const API_URL =
+            "http://127.0.0.1:5000";
+
+
+
+        // ==========================================
+        // LOGIN FORM
+        // ==========================================
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+
+
+        // ==========================================
+        // LOGIN BUTTON
+        // ==========================================
+
+        const loginButton =
+            loginForm.querySelector(
+                ".login-btn"
+            );
+
+
+
+        // ==========================================
+        // LOGIN
+        // ==========================================
+
+        loginForm.addEventListener(
+            "submit",
+            async function(event) {
+
+
+                event.preventDefault();
+
+
+
+                // ==========================================
+                // GET FORM VALUES
+                // ==========================================
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+
+
+                // ==========================================
+                // BASIC VALIDATION
+                // ==========================================
+
+                if (!email || !password) {
+
+                    alert(
+                        "Please enter email and password."
+                    );
+
+                    return;
+
+                }
+
+
+
+                // ==========================================
+                // DISABLE BUTTON
+                // ==========================================
+
+                loginButton.disabled =
+                    true;
+
+
+                loginButton.textContent =
+                    "Logging in...";
+
+
+
+                try {
+
+
+                    // ==========================================
+                    // SEND LOGIN REQUEST
+                    // ==========================================
+
+                    const response =
+                        await fetch(
+                            `${API_URL}/api/login`,
+                            {
+
+                                method: "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json"
+
+                                },
+
+                                body: JSON.stringify({
+
+                                    email:
+                                        email,
+
+                                    password:
+                                        password
+
+                                })
+
+                            }
+                        );
+
+
+
+                    // ==========================================
+                    // READ RESPONSE
+                    // ==========================================
+
+                    const data =
+                        await response.json();
+
+
+
+                    // ==========================================
+                    // LOGIN FAILED
+                    // ==========================================
+
+                    if (!response.ok) {
+
+                        alert(
+                            data.message ||
+                            "Login failed."
+                        );
+
+                        return;
+
+                    }
+
+
+
+                    // ==========================================
+                    // CHECK LOGIN RESPONSE
+                    // ==========================================
+
+                    if (
+                        !data.token ||
+                        !data.user
+                    ) {
+
+                        alert(
+                            "Invalid login response from server."
+                        );
+
+                        return;
+
+                    }
+
+
+
+                    // ==========================================
+                    // SAVE TOKEN
+                    // ==========================================
+
+                    localStorage.setItem(
+                        "campusconnectToken",
+                        data.token
+                    );
+
+
+
+                    // ==========================================
+                    // SAVE USER
+                    // ==========================================
+
+                    localStorage.setItem(
+                        "campusconnectUser",
+                        JSON.stringify(
+                            data.user
+                        )
+                    );
+
+
+
+                    // ==========================================
+                    // GET ACCOUNT TYPE
+                    // ==========================================
+
+                    const accountType =
+                        String(
+                            data.user.accountType ||
+                            ""
+                        )
+                            .trim()
+                            .toLowerCase();
+
+
+
+                    // ==========================================
+                    // LOGIN SUCCESS
+                    // ==========================================
+
+                    alert(
+                        "Login successful!"
+                    );
+
+
+
+                    // ==========================================
+                    // ROLE BASED REDIRECT
+                    // ==========================================
+
+                    if (
+                        accountType ===
+                        "student"
+                    ) {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    }
+
+
+                    else if (
+                        accountType ===
+                        "staff"
+                    ) {
+
+                        window.location.href =
+                            "staff-dashboard.html";
+
+                    }
+
+
+                    else {
+
+                        console.error(
+                            "Unknown account type:",
+                            data.user.accountType
+                        );
+
+
+                        alert(
+                            "Invalid account type: " +
+                            data.user.accountType
+                        );
+
+                    }
+
+
+                }
+
+
+                catch (error) {
+
+
+                    console.error(
+                        "Login Error:",
+                        error
+                    );
+
+
+                    alert(
+                        "Unable to connect to the server. Make sure the backend is running."
+                    );
+
+                }
+
+
+                finally {
+
+
+                    loginButton.disabled =
+                        false;
+
+
+                    loginButton.textContent =
+                        "Login to CampusConnect";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
